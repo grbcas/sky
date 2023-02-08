@@ -23,12 +23,12 @@ def learning_english(dict_tasks: dict, username: str):
             print(f'Неправильно.\nПравильный ответ: {value}')
 
     # считаем процент выполненных заданий
-    answer_percent = '{:.2}'.format(answer_counter/tasks_quantity)
+    answer_percent = '{:.2%}'.format(answer_counter/tasks_quantity)
 
-    print(f'Вот и всё, {username}!'
+    print(f'Вот и всё, {username}! '
           f'Вы ответили на {answer_counter} вопросов из {tasks_quantity} верно.\n'
-          f'Вы заработали {score} баллов.'
-          f'Это {answer_percent} процентов.')
+          f'Вы заработали {score} баллов. '
+          f'Это {answer_percent}.')
 
 
 if __name__ == '__main__':
@@ -40,3 +40,4 @@ if __name__ == '__main__':
 
     name = greeting()
     learning_english(dict_test_tasks, name)
+
