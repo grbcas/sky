@@ -10,8 +10,8 @@ def learning_english(dict_):
             print(f'Ваш ответ: {answer}')
             print(f'Верный ответ: {value}')
     answer_percent = int(answer_counter/len(dict_)*100)
-    return print(f'Вот и всё! Вы ответили на {answer_counter} '
-                 f'вопросов из {len(dict_)} верно, это {answer_percent} процентов.')
+    return f'Вот и всё! Вы ответили на {answer_counter} ' \
+           f'вопросов из {len(dict_)} верно, это {answer_percent} процентов.'
 
 
 if __name__ == '__main__':
@@ -20,4 +20,4 @@ if __name__ == '__main__':
         "I ___ a coder": "am",
         "I live ___ Moscow": "in"
     }
-    learning_english(dict_tasks)
+    print(learning_english(dict_tasks))
