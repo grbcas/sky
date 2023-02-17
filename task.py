@@ -11,7 +11,7 @@ def greeting():
 def learning_english(dict_tasks: dict):
     # Создаем счетчики ответов и баллов
     answer_counter = 0
-    # score = 0
+    score = 0
     tasks_quantity = len(dict_tasks)
 
     for key_question, value_answer in dict_tasks.items():
@@ -19,9 +19,18 @@ def learning_english(dict_tasks: dict):
         for i_tryies in range(3):
             answer = input('Введите недостающее слово: ').lower()
             if answer == value_answer and i_tryies < 3:
-                print('Ответ верный!\nВы получаете 10 баллов!')
+                # print('Ответ верный!\nВы получаете 10 баллов!')
                 answer_counter += 1
-                # score += 10
+                match i_tryies:
+                    case 0:
+                        score += 3
+                        print(f'Ответ верный!\nВы получаете {3 - i_tryies} балла!')
+                    case 1:
+                        score += 2
+                        print(f'Ответ верный!\nВы получаете {3 - i_tryies} балла!')
+                    case 2:
+                        score += 1
+                        print(f'Ответ верный!\nВы получаете {3 - i_tryies} балл!')
                 break
             elif i_tryies < 2:
                 print(f'Осталось попыток: {2-i_tryies}, попробуйте еще раз!')
@@ -34,7 +43,7 @@ def learning_english(dict_tasks: dict):
 
     print(f'Вот и всё! '
           f'Вы ответили на {answer_counter} вопросов из {tasks_quantity} верно.\n'
-          # f'Вы заработали {score} баллов. '
+          f'Вы заработали {score} баллов. '
           f'Это {answer_percent} процентов.')
 
 
@@ -44,7 +53,6 @@ if __name__ == '__main__':
     answers = ["is", "am", "in"]
 
     dict_questions_answers = {}
-
     for i, val in enumerate(questions):
         dict_questions_answers[val] = answers[i]
 
