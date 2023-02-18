@@ -16,25 +16,24 @@ def learning_english(dict_tasks: dict):
 
     for key_question, value_answer in dict_tasks.items():
         print(f'Задание: {key_question}')
-        for i_tryies in range(3):
+        for i_attempt in range(3):
             answer = input('Введите недостающее слово: ').lower()
-            if answer == value_answer and i_tryies < 3:
-                # print('Ответ верный!\nВы получаете 10 баллов!')
+            if answer == value_answer and i_attempt < 3:
                 answer_counter += 1
-                match i_tryies:
+                match i_attempt:
                     case 0:
                         score += 3
-                        print(f'Ответ верный!\nВы получаете {3 - i_tryies} балла!')
+                        print(f'Ответ верный!\nВы получаете {3 - i_attempt} балла!')
                     case 1:
                         score += 2
-                        print(f'Ответ верный!\nВы получаете {3 - i_tryies} балла!')
+                        print(f'Ответ верный!\nВы получаете {3 - i_attempt} балла!')
                     case 2:
                         score += 1
-                        print(f'Ответ верный!\nВы получаете {3 - i_tryies} балл!')
+                        print(f'Ответ верный!\nВы получаете {3 - i_attempt} балл!')
                 break
-            elif i_tryies < 2:
-                print(f'Осталось попыток: {2-i_tryies}, попробуйте еще раз!')
-                i_tryies += 1
+            elif i_attempt < 2:
+                print(f'Осталось попыток: {2-i_attempt}, попробуйте еще раз!')
+                i_attempt += 1
             else:
                 print(f'Неправильно.\nПравильный ответ: {value_answer}')
 
