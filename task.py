@@ -5,11 +5,14 @@ def greeting():
         return ready
     else:
         print('Кажется, вы не хотите играть. Очень жаль.')
-        return exit()
+        exit()
 
 
-def learning_english(dict_tasks: dict):
-    # Создаем счетчики ответов и баллов
+def learning_english(dict_tasks: dict) -> str:
+    """
+    задаем вопросы, считаем ответы и баллы
+    возвращаем текст c оценками
+    """
     answer_counter = 0
     score = 0
     tasks_quantity = len(dict_tasks)
@@ -39,11 +42,12 @@ def learning_english(dict_tasks: dict):
 
     # считаем процент выполненных заданий
     answer_percent = round(100*answer_counter/tasks_quantity, 2)
-
-    print(f'Вот и всё! '
-          f'Вы ответили на {answer_counter} вопросов из {tasks_quantity} верно.\n'
-          f'Вы заработали {score} баллов. '
-          f'Это {answer_percent} процентов.')
+    output = str(
+        f'Вот и всё! '
+        f'Вы ответили на {answer_counter} вопросов из {tasks_quantity} верно.\n'
+        f'Вы заработали {score} баллов. '
+        f'Это {answer_percent} процентов.')
+    return output
 
 
 if __name__ == '__main__':
@@ -52,8 +56,9 @@ if __name__ == '__main__':
     answers = ["is", "am", "in"]
 
     dict_questions_answers = {}
-    for i, val in enumerate(questions):
-        dict_questions_answers[val] = answers[i]
-
+    # for i, val in enumerate(questions):
+    #     dict_questions_answers[val] = answers[i]
+    for i_question, i_answer in zip(questions, answers):
+        dict_questions_answers[i_question] = i_answer
     greeting()
-    learning_english(dict_questions_answers)
+    print(learning_english(dict_questions_answers))
