@@ -15,22 +15,22 @@ MORSE_CODE_DICT = {'A': '.-', 'B': '-...',
                    '(': '-.--.', ')': '-.--.-'}
 
 
+# get input
 def get_input() -> str:
     input_word = input('word_to_encode: ').upper()
     return input_word
 
 
-# get input and check if it can be encoded with Morse code
+# check if input can be encoded with Morse code
 def check_input(str_to_encode) -> str:
     if not set(str_to_encode) - set(MORSE_CODE_DICT):
         return str_to_encode
     else:
-        print('incorrect', *(set(word_to_encode) - set(MORSE_CODE_DICT)))
+        print('incorrect symbols: ', *(set(word_to_encode) - set(MORSE_CODE_DICT)))
 
 
 # encoding str into Morse code
 def morse_encode(str_to_encode: str) -> list:
-    print(str_to_encode)
     morse_encoded_symbols = []
     for symbol in str_to_encode:
         morse_encoded_symbols.append(MORSE_CODE_DICT.get(symbol))
