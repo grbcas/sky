@@ -1,9 +1,10 @@
 def get_input():
-   word_to_decode = input('word_to_decode')
-   return
+    word_to_encode = input('word_to_encode')
+    return word_to_encode
+
 
 def morse_encode(input_word: str) -> str:
-
+    pass
 
 
 if __name__ == '__main__':
@@ -22,4 +23,5 @@ if __name__ == '__main__':
                        '0': '-----', ', ': '--..--', '.': '.-.-.-',
                        '?': '..--..', '/': '-..-.', '-': '-....-',
                        '(': '-.--.', ')': '-.--.-'}
-    morse_encode()
+
+    morse_encode(get_input())
