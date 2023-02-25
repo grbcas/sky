@@ -1,5 +1,6 @@
 
 def choose_difficulty_level() -> dict:
+    """выбираем задания по уровню сложности"""
     words_easy = {
         "family": "семья",
         "hand": "рука",
@@ -34,6 +35,7 @@ def choose_difficulty_level() -> dict:
 
 
 def get_answers(words_dict: dict) -> dict:
+    """получаем ответы пользователя, выдаем словарь с ответами"""
     answers = {}
     for key, val in words_dict.items():
         print(f'{key}, {len(val)} букв,  начинается на {val[0]}...')
@@ -49,6 +51,7 @@ def get_answers(words_dict: dict) -> dict:
 
 
 def score_result(answer_dict: dict):
+    """считаем правильные и неправильные ответы, печатаем рейтинг"""
     levels = {
         0: "Нулевой",
         1: "Так себе",
@@ -75,7 +78,3 @@ if __name__ == '__main__':
     words = choose_difficulty_level()
     result = get_answers(words)
     score_result(result)
-
-
-
-
