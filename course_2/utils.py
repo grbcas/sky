@@ -11,10 +11,11 @@ import basic_word
 import requests
 import random
 
-URL = 'https://www.jsonkeeper.com/b/5LLM'
+# URL = 'https://www.jsonkeeper.com/b/5LLM'
+URL = 'https://api.npoint.io/463f7575c7f973ca6761'
 
 
-def load_random_word(url):
+def load_random_word(url=URL):
 	with requests.get(url) as get_req:
 		word_subwords_json = get_req.json()
 
@@ -22,9 +23,8 @@ def load_random_word(url):
 	word = random_word.get('word')
 	subwords_list = random_word.get('subwords')
 
-	anagrams = basic_word.BasicWord(word, subwords_list)
-	return anagrams
+	return basic_word.BasicWord(word, subwords_list)
 
 
 if __name__ == '__main__':
-	print(load_random_word(URL))
+	print(load_random_word())
