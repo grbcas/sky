@@ -46,7 +46,7 @@ def get_profession_by_title(title) -> dict:
 
 def check_fitness(student, profession):
 	"""возвращает словарь типа student:skills и fit_percent"""
-	student_has = get_student_by_pk(student).keys()
+	student_has = [x for x in get_student_by_pk(student).values()][0]
 
 	professions = (get_profession_by_title(profession).get(profession))
 
@@ -57,10 +57,10 @@ def check_fitness(student, profession):
 
 if __name__ == '__main__':
 	# pk = input('Введите номер студента: ')
-	pk = 3
-	result = get_student_by_pk(pk).keys()
-	print(*result)
-	result = get_profession_by_title('Frontend')
-	print(result)
+	pk = 1
+	# result = get_student_by_pk(pk).keys()
+	# print(*result)
+	# result = get_profession_by_title('Backend')
+	# print(result)
 	result = check_fitness(pk, 'Backend')
-	print(*result['has'], result['lacks'], result['fit_percent'])
+	print(*result['has'], *result['lacks'], result['fit_percent'])
