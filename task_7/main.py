@@ -1,16 +1,24 @@
-from functions import check_fitness, get_student_by_pk
+from functions import check_fitness, get_student_by_pk, get_profession_by_title
 
-pk = int(input('Введите номер студента: '))
-# pk = 1
-dict_name = get_student_by_pk(pk).keys()
 
-name = ''.join([x for x in dict_name])
-print(name)
-skills = ', '.join(*get_student_by_pk(pk).values())
-print(f'Знает {skills}')
-title = input(f'Выберите специальность для оценки студента {name}: ').capitalize()
-# title = 'Backend'
-result = check_fitness(pk, title)
-print('Пригодность', result['fit_percent'])
-print('Студент знает', ', '.join(result['has']))
-print('Студент не знает', ', '.join(result["lacks"]))
+def main():
+	pk = int(input('Введите номер студента: '))
+	student = get_student_by_pk(pk)
+
+	student_name = ''.join([x for x in student.keys()])
+	print(student_name)
+	student_skills = [x for x in student.values()][0]
+	print(f'Знает: {", ".join(student_skills)}')
+
+	title = input(f'Выберите специальность для оценки студента {student_name}: ').capitalize()
+	profession = (get_profession_by_title(title).get(title))
+
+	result = check_fitness(student_skills, profession)
+	print(result)
+	print('Пригодность:', result['fit_percent'])
+	print('Студент знает:', ', '.join(result['has']))
+	print('Студент не знает:', ', '.join(result['lacks']))
+
+
+if __name__ == '__main__':
+	main()

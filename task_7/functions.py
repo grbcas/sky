@@ -1,26 +1,26 @@
 import pathlib
 import json
 
+PATH_students = pathlib.Path('students.json')
+PATH_professions = pathlib.Path('professions.json')
 
 def load_students() -> json:
 	"""Загружает список студентов из файла"""
-	path = pathlib.Path('students.json')
 	try:
-		with open(path, "r") as f:
+		with open(PATH_students, "r") as f:
 			return json.load(f)
 	except FileNotFoundError:
-		print(f'No such file or directory: {path}')
+		print(f'No such file or directory: {PATH_students}')
 		exit()
 
 
 def load_professions() -> json:
 	"""Загружает список профессий из файла"""
-	path = pathlib.Path('professions.json')
 	try:
-		with open(path, "r") as f:
+		with open(PATH_professions, "r") as f:
 			return json.load(f)
 	except FileNotFoundError:
-		print(f'No such file or directory: {path}')
+		print(f'No such file or directory: {PATH_professions}')
 		exit()
 
 
@@ -44,23 +44,14 @@ def get_profession_by_title(title) -> dict:
 	exit()
 
 
-def check_fitness(student, profession):
+def check_fitness(student_skills: list, profession: list) -> dict:
 	"""возвращает словарь типа student:skills и fit_percent"""
-	student_has = [x for x in get_student_by_pk(student).values()][0]
-
-	professions = (get_profession_by_title(profession).get(profession))
-
-	lacks = list(set(professions) - set(student_has))
-	fit_percent = round(100 - len(lacks) / len(professions) * 100) # ?????????
-	return {"has": student_has, "lacks": lacks, "fit_percent": fit_percent}
+	has = set(student_skills) - (set(student_skills) - set(profession))
+	lacks = set(profession) - set(student_skills)
+	fit_percent = round(100 - len(lacks) / len(profession) * 100)
+	return {"has": has, "lacks": lacks, "fit_percent": fit_percent}
 
 
 if __name__ == '__main__':
-	# pk = input('Введите номер студента: ')
-	pk = 1
-	# result = get_student_by_pk(pk).keys()
-	# print(*result)
-	# result = get_profession_by_title('Backend')
-	# print(result)
-	result = check_fitness(pk, 'Backend')
+	result = check_fitness(['Python', 'Go', 'Linux'], ["Python", "Linux", "Docker", "SQL", "Flask"])
 	print(*result['has'], *result['lacks'], result['fit_percent'])
