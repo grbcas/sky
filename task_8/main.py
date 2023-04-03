@@ -2,14 +2,29 @@ from json import load
 from random import shuffle
 from utils import *
 
+PATH = 'questions.json'
+
+
+def read_data(file_name):
+	"""
+	Чтение данных из JSON файла
+	Args:
+	file_name: имя файла
+	Returns:	декодировнные данные
+	"""
+	with open(file_name, mode='r', encoding='utf-8') as file:
+		data = load(file)
+	return data
+
 
 def main():
+	data = read_data(PATH)
+
+	# Создайте список экземпляров класса Question
 	questions = []
-	# получаем список вопросов из файла
-	with open('questions.json', 'r', encoding='utf-8') as f:
-		data = load(f)
-		for i in data:
-			questions.append(Questions(i['q'], i['d'], i['a']))
+	for i in data:
+		questions.append(Questions(i['q'], i['d'], i['a']))
+	# формируем список вопросов в случайном порядке
 	shuffle(questions)
 
 	# получаем и обрабатываем ответы
