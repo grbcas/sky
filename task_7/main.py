@@ -6,9 +6,11 @@ def main():
 	student = get_student_by_pk(pk)
 
 	# Выводим информации о студенте
-	student_name = ''.join([x for x in student.keys()])
+	# student_name = ''.join([x for x in student.keys()])
+	student_name = next(iter(student))
 	print(student_name)
-	student_skills = [x for x in student.values()][0]
+	# student_skills = [x for x in student.values()][0]
+	student_skills = list(student.values())[0]
 	print(f'Знает: {", ".join(student_skills)}')
 
 	# Пользовательский ввод специальности для оценки студента
