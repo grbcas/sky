@@ -2,7 +2,7 @@ import players
 import utils
 
 # URL = 'https://www.jsonkeeper.com/b/5LLM'
-
+# получаем заданное слово
 task_word = utils.load_random_word()
 
 answers_quantity = task_word.count_subwords()
@@ -11,7 +11,7 @@ player = input('Введите имя: ')
 players.Player.get_name = player
 
 print(f'Привет, {player}!\n'
-	f'Составьте {answers_quantity} слов из слова "{task_word.word}"\n'
+	f'Составьте {answers_quantity} слов из слова "{task_word.get_word}"\n'
 	'Слова должны быть не короче 3 букв\n'
 	'Чтобы закончить игру, угадайте все слова или напишите "stop"\n'
 	'Поехали, ваше первое слово?')
@@ -23,23 +23,30 @@ right_answers = 0
 while True:
 	"""Запускайте цикл, пока количество угаданных слов не сравняется с количеством слов, которые можно составить."""
 	user_input = input('\nВведите слово: ').lower()
+
 	if user_input in ['стоп', 'stop']:
-		print(f'Программа: Игра завершена, вы угадали {right_answers} слов!')
-		exit()
+		break
 
-	task_word.get_answer = user_input
+	try:
+		task_word.get_answer = user_input
+	except Exception as e:
+		print(f'"{user_input}" - {e}')
+		continue
 
-	if play.check_answer_repeat(user_input):
-		play.add_answer(user_input)
-		if task_word.check_answer():
-			right_answers += 1
-			print('верно')
-			play.count_user_answers()
-		else:
-			print('неверно')
+	if not play.check_answer_repeat(user_input):
+		print("Слово уже было использовано!")
+	elif task_word.check_answer():
+		right_answers += 1
+		print('верно')
+		play.count_user_answers()
+	else:
+		print('неверно')
+	# добавление слова в использованные слова
+	play.add_answer(user_input)
 
-	print(right_answers, 'right_answers', answers_quantity)
+	print(f'Задано слово "{task_word.get_word}" - верно ответов: {right_answers}, всего слов: {answers_quantity}')
 	if right_answers == answers_quantity:
 		break
 
-print(f'Программа: Игра завершена, вы угадали {right_answers} слов!')
+print(f'Программа: Игра завершена, вы угадали {right_answers} слов! '
+	  f'Kоличество использованных слов {play.count_user_answers()}')

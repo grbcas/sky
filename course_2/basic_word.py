@@ -1,18 +1,35 @@
 class BasicWord:
 	"""
 	**Поля:**
-- исходное слово,
-- набор допустимых подслов.
+	- исходное слово,
+	- набор допустимых подслов.
 	**Методы:**
-- проверку введенного слова в списке допустимых подслов (вернет bool),
-- подсчет количества подслов (вернет int).
-- метод  `__repr__`
-"""
+	- проверку введенного слова в списке допустимых подслов (вернет bool),
+	- подсчет количества подслов (вернет int).
+	- метод  `__repr__`
+	"""
+	# CYRILLIC_LOWER = (chr(x) for x in range(1072, 1104))
+	CYRILLIC_LOWER = set('абвгдежзийклмнопрстуфхцчшщъыьэюя')
 
 	def __init__(self, word, subwords, user_answer=''):
-		self.word = word
+
+		self.__word = word
 		self.__subwords = subwords
 		self.__user_answer = user_answer
+
+	@classmethod
+	def validate_user_answer(cls, user_answer):
+		"""
+		проверка слова на символы и длину слова
+		:param user_answer:
+		:return:
+		"""
+		if not set(user_answer).issubset(cls.CYRILLIC_LOWER):
+			raise ValueError('слово должно быть написано кириллицей без пробелов')
+			# print('Слово должно быть написано кириллицей без пробелов')
+		elif len(user_answer) < 3:
+			raise ValueError('слишком короткое слово')
+			# print('Слишком короткое слово')
 
 	@property
 	def get_answer(self):
@@ -20,33 +37,28 @@ class BasicWord:
 
 	@get_answer.setter
 	def get_answer(self, user_answer):
+		self.validate_user_answer(user_answer)
 		self.__user_answer = user_answer
 
-	def check_answer(self):
-		"""проверку введенного слова в списке допустимых подслов (вернет bool),"""
-		cyrillic_lower = [chr(x) for x in range(1072, 1104)]
-		if not set(set(self.__user_answer)).issubset(set(cyrillic_lower)):
-			print('введите слово кириллицей без пробелов')
-			return False
-		if len(self.__user_answer) < 3:
-			print('слишком короткое слово')
-			return False
-		# print(f'{self.__subwords}')
+	@property
+	def get_word(self):
+		return self.__word
+
+	def check_answer(self) -> bool:
+		"""
+		проверка введенного слова в списке допустимых подслов
+		:return: bool
+		"""
 		if self.__user_answer in self.__subwords:
 			return True
 
 	def count_subwords(self) -> int:
 		"""подсчет количества подслов (вернет int)"""
-		len_answers = len(self.__subwords)
-		return len_answers
+		return len(self.__subwords)
 
 	def __repr__(self):
-		return f"{self.__class__}: {self.word} {self.__subwords}"
+		return f"{self.__class__}: {self.__word} {self.__subwords}"
 
 
 if __name__ == '__main__':
-	ex = BasicWord("питон", ["пот", "тип", "топ", "пион", "понт"])
-	ex.get_answer = 'пион'
-	print(ex.count_subwords())
-	print('пион', ex.check_answer())
-	print(ex.__dict__)
+	pass

@@ -1,12 +1,3 @@
-"""
-Напишите функцию `load_random_word()` в файле `utils`, которая:
-
-- получит список слов с внешнего ресурса,
-- выберет случайное слово,
-- создаст экземпляр класса `BasicWord`,
-- вернет этот экземпляр.
-"""
-
 import basic_word
 import requests
 import random
@@ -16,6 +7,13 @@ URL = 'https://api.npoint.io/463f7575c7f973ca6761'
 
 
 def load_random_word(url=URL):
+	"""
+	функция:
+	- получит список слов с внешнего ресурса,
+	- выберет случайное слово,
+	- создаст экземпляр класса `BasicWord`,
+	- вернет этот экземпляр.
+	"""
 	with requests.get(url) as get_req:
 		word_subwords_json = get_req.json()
 
@@ -27,4 +25,4 @@ def load_random_word(url=URL):
 
 
 if __name__ == '__main__':
-	print(load_random_word())
+	pass
