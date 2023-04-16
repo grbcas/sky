@@ -7,15 +7,15 @@ class Player:
 		self.user_name = user_name
 		self.__user_answers = set()
 
-	def get_name(self):
+	def name(self):
 		return self.user_name
 
 	@property
-	def get_user_answers(self):
+	def user_answers(self):
 		return self.__user_answers
 
-	@get_user_answers.setter
-	def get_user_answers(self, user_answers):
+	@user_answers.setter
+	def user_answers(self, user_answers):
 		self.__user_answers = user_answers
 
 	def add_answer(self, answer) -> None:
@@ -34,7 +34,3 @@ class Player:
 
 	def __repr__(self):
 		return f"{self.__class__}: {self.user_name} {self.__user_answers}"
-
-
-if __name__ == '__main__':
-	pass

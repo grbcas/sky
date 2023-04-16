@@ -26,22 +26,20 @@ class BasicWord:
 		"""
 		if not set(user_answer).issubset(cls.CYRILLIC_LOWER):
 			raise ValueError('слово должно быть написано кириллицей без пробелов')
-			# print('Слово должно быть написано кириллицей без пробелов')
 		elif len(user_answer) < 3:
 			raise ValueError('слишком короткое слово')
-			# print('Слишком короткое слово')
 
 	@property
-	def get_answer(self):
+	def answer(self):
 		return self.__user_answer
 
-	@get_answer.setter
-	def get_answer(self, user_answer):
+	@answer.setter
+	def answer(self, user_answer):
 		self.validate_user_answer(user_answer)
 		self.__user_answer = user_answer
 
 	@property
-	def get_word(self):
+	def word(self):
 		return self.__word
 
 	def check_answer(self) -> bool:
@@ -58,7 +56,3 @@ class BasicWord:
 
 	def __repr__(self):
 		return f"{self.__class__}: {self.__word} {self.__subwords}"
-
-
-if __name__ == '__main__':
-	pass

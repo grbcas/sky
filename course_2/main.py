@@ -8,10 +8,10 @@ task_word = utils.load_random_word()
 answers_quantity = task_word.count_subwords()
 
 player = input('Введите имя: ')
-players.Player.get_name = player
+players.Player.name = player
 
 print(f'Привет, {player}!\n'
-	f'Составьте {answers_quantity} слов из слова "{task_word.get_word}"\n'
+	f'Составьте {answers_quantity} слов из слова "{task_word.word.upper()}"\n'
 	'Слова должны быть не короче 3 букв\n'
 	'Чтобы закончить игру, угадайте все слова или напишите "stop"\n'
 	'Поехали, ваше первое слово?')
@@ -28,7 +28,7 @@ while True:
 		break
 
 	try:
-		task_word.get_answer = user_input
+		task_word.answer = user_input
 	except Exception as e:
 		print(f'"{user_input}" - {e}')
 		continue
@@ -44,7 +44,7 @@ while True:
 	# добавление слова в использованные слова
 	play.add_answer(user_input)
 
-	print(f'Задано слово "{task_word.get_word}" - верно ответов: {right_answers}, всего слов: {answers_quantity}')
+	print(f'Задано слово "{task_word.word}" - верно ответов: {right_answers}, всего слов: {answers_quantity}')
 	if right_answers == answers_quantity:
 		break
 

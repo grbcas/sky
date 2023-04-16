@@ -22,7 +22,3 @@ def load_random_word(url=URL):
 	subwords_list = random_word.get('subwords')
 
 	return basic_word.BasicWord(word, subwords_list)
-
-
-if __name__ == '__main__':
-	pass
