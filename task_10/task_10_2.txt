@@ -1,0 +1,38 @@
+adduser
+deluser
+fuser
+fusermount
+newusers
+ntfsusermap
+pam_extrausers_chkpwd
+pam_extrausers_update
+runuser
+systemd-sysusers
+useradd
+userdel
+usermod
+users
+xdg-user-dir
+xdg-user-dirs-update
+env | grep -P 'MY_USER|MY_PASSWORD'
+MY_USER=MY_USER
+MY_PASSWORD=MY_PASSWORD
+MY_USER
+MY_PASSWORD
+Reading package lists...
+Building dependency tree...
+Reading state information...
+python3 is already the newest version (3.8.2-0ubuntu2).
+The following packages were automatically installed and are no longer required:
+  libfwupdplugin1 libxmlb1
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Hello from Linux!
+/home/ubuntu/project/
+├── src
+│   ├── classes.py
+│   └── config.py
+└── tests
+    └── test_general_auth.py
+
+2 directories, 3 files
